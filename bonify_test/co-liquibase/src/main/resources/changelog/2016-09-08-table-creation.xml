@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        ">
+
+    <changeSet id="201609081104" author="cthammana">
+        <comment>This table is used for storing images details</comment>
+        <sql>
+            CREATE TABLE `channel` (
+            `channel` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(100) NOT NULL,
+            PRIMARY KEY (`channel`),
+            UNIQUE KEY `channel_UNIQUE` (`channel`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+    <changeSet id="201609081106" author="cthammana">
+        <comment>This is User Table</comment>
+        <sql>
+            CREATE TABLE `user` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `name` varchar(50) NOT NULL,
+            `password` varchar(15) NOT NULL,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `id_UNIQUE` (`id`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+    <changeSet id="201609081107" author="cthammana">
+        <comment>This user_channel_notification</comment>
+        <sql>
+            CREATE TABLE `user_channel_notification` (
+            `user_id` bigint(20) NOT NULL,
+            `news_id` bigint(20) NOT NULL,
+            `read` tinyint(1) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`user_id`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="201609081108" author="cthammana">
+        <comment>This is user_channel_subscription table</comment>
+        <sql>
+            CREATE TABLE `user_channel_subscription` (
+            `user_id` bigint(20) NOT NULL,
+            `channel_id` int(11) NOT NULL,
+            PRIMARY KEY (`user_id`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+    <changeSet id="201609081109" author="cthammana">
+        <comment>This is News history Table used for storing Latest News</comment>
+        <sql>
+            CREATE TABLE `news` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `news_data` varchar(2000) NOT NULL,
+            `channel_id` int(11) NOT NULL,
+            `region` VARCHAR(10) NOT NULL,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `id_UNIQUE` (`id`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+    <changeSet id="201609081110" author="cthammana">
+        <comment>This is News history Table used for storing old News</comment>
+        <sql>
+            CREATE TABLE `news_history` (
+            `id` bigint(20) NOT NULL ,
+            `news_data` varchar(2000) NOT NULL,
+            `channel_id` int(11) NOT NULL,
+            `region` VARCHAR(10) NOT NULL,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `id_UNIQUE` (`id`)
+            ) ENGINE=InnoDB
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

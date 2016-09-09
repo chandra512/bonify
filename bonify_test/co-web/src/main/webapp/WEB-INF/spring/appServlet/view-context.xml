@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/mvc"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <beans:bean id="templateResolver"
+                class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/"/>
+        <beans:property name="suffix" value=".html"/>
+        <beans:property name="templateMode" value="HTML5"/>
+        <!-- Template cache is set to false (default is true). -->
+        <beans:property name="cacheable" value="false"/>
+        <beans:property name="characterEncoding" value="UTF-8"/>
+    </beans:bean>
+
+    <beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <beans:property name="templateResolver" ref="templateResolver"/>
+        <beans:property name="dialects">
+            <beans:set>
+                <beans:bean class="org.thymeleaf.spring4.dialect.SpringStandardDialect"/>
+                <beans:bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+            </beans:set>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean
+            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <beans:property name="contentNegotiationManager" ref="cnManager"/>
+        <beans:property name="viewResolvers">
+            <beans:list>
+                <!-- Used here for 'xml' and 'atom' views -->
+                <beans:bean
+                        class="org.springframework.web.servlet.view.BeanNameViewResolver">
+                    <beans:property name="order" value="1"/>
+                </beans:bean>
+                <beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+                    <beans:property name="templateEngine" ref="templateEngine"/>
+                    <beans:property name="order" value="2"/>
+                    <!-- We need to set exclusions because Content Negotiation tries to
+                        resolve from -->
+                    <!-- Thymeleaf even if a specific view bean (of a different class) is
+                        already -->
+                    <!-- found, which might cause exceptions (e.g. ThymeleafView does not
+                        have a -->
+                    <!-- 'marshaller' property). -->
+                    <beans:property name="excludedViewNames" value="*.xml"/>
+                </beans:bean>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <!-- Setup a simple strategy: 1. Only path extension is taken into account,
+        Accept headers are ignored. 2. Return HTML by default when not sure. -->
+    <beans:bean id="cnManager"
+                class="org.">
+        <beans:property name="ignoreAcceptHeader" value="true"/>
+        <beans:property name="defaultContentType" value="text/html"/>
+    </beans:bean>
+
+    <!--&lt;!&ndash; - i18n configurations - basename : path to properties - fallbackToSystemLocale
+       : will use messages_en.properties if no one found requested locale &ndash;&gt;
+    <beans:bean id="messageSource"
+                class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:/resources/messages"/>
+        <beans:property name="fallbackToSystemLocale" value="false"/>
+        <beans:property name="defaultEncoding" value="UTF-8"/>
+    </beans:bean>-->
+
+</beans:beans>

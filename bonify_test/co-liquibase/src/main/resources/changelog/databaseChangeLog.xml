@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        ">
+
+    <include file="src/main/resources/changelog/2016-09-08-table-creation.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-09-UpdateNews.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-09-UpdateUserNotifcation.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-09-UpdateUserNotifcation2.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-09-AlterTableUserNotifcation.xml"></include>
+
+</databaseChangeLog>

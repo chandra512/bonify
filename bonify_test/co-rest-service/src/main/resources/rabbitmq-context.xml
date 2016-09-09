@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:activemq="http://activemq.apache.org/schema/core"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+             http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+             ">
+
+
+    <!--Loading propertiesfile -->
+
+    <context:component-scan base-package="com.cworks.restservice"></context:component-scan>
+
+    <beans:bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <beans:property name="brokerURL" value="vm://localhost">
+        </beans:property>
+
+    </beans:bean>
+
+    <beans:bean id="pooledJmsConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+                destroy-method="stop">
+        <beans:property name="connectionFactory" ref="jmsConnectionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+        <beans:constructor-arg value="jmsExample"/>
+    </beans:bean>
+
+    <beans:bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <beans:property name="connectionFactory" ref="pooledJmsConnectionFactory"/>
+      
+    </beans:bean>
+
+</beans:beans>
