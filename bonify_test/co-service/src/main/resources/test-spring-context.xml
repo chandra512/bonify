@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="classpath:dao-application-context.xml"></import>
+    <import resource="classpath:test-dao-application-context.xml"></import>
 
     <mvc:annotation-driven></mvc:annotation-driven>
 

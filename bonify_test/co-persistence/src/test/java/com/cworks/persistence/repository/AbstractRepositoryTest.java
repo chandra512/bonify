@@ -15,7 +15,7 @@ import com.cworks.persistence.entities.UserEntity;
  * Created by cthammana on 08.09.2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:dao-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:test-dao-application-context.xml" })
 @Transactional
 public abstract class AbstractRepositoryTest
 {

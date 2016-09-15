@@ -1,5 +1,6 @@
 package com.cworks.persistence.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,14 +12,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.gson.Gson;
+
 /**
  * This is News Entity class which stores all the news
  * Created by cthammana on 09.09.2016.
  */
 @Entity
 @Table(name = "news")
-public class NewsEntity
+public class NewsEntity implements Serializable
 {
+	private static final long serialVersionUID = -4949133764867037156L;
+
+	private static final Gson gson = new Gson();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -38,8 +45,14 @@ public class NewsEntity
 	@Column(name = "created")
 	private Date createdDate;
 
+	public NewsEntity()
+	{
+
+	}
+
 	public NewsEntity(String newsData, ChannelEntity channelId, String region)
 	{
+		super();
 		this.newsData = newsData;
 		this.channelId = channelId;
 		this.region = region;
@@ -96,4 +109,10 @@ public class NewsEntity
 	{
 		this.createdDate = createdDate;
 	}
+
+	public String toString()
+	{
+		return gson.toJson(this);
+	}
+
 }

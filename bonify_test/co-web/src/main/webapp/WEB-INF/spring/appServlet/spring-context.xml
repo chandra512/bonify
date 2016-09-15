@@ -9,13 +9,14 @@
 
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.cworks"/>
-   <!-- <context:component-scan base-package="com.vm.datasource.sql"/>
-    <context:component-scan base-package="com.vm.datasource.nosql"/>-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <context:component-scan base-package="com.cworks.controllers"/>
+    <context:component-scan base-package="com.cworks.persistence"/>
+    <context:component-scan base-package="com.cworks.dao"/>
+    <context:component-scan base-package="com.cworks.api"/>
 
-    <import resource="view-context.xml"></import>
-    <!--<import resource="classpath:spring/dao-application-context.xml"></import>
-    <import resource="classpath:spring/hbase-dao-application-context.xml"></import>-->
+    <import resource="dao-application-context.xml"></import>
+
+    <!--<import resource="view-context.xml"></import>-->
+    <mvc:annotation-driven></mvc:annotation-driven>
 
 </beans>

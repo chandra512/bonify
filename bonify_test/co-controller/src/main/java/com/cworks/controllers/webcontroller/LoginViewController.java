@@ -1,11 +1,8 @@
 package com.cworks.controllers.webcontroller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.cworks.dao.service.UserService;
 
 /**
  * This controller is responsible for display the Login View
@@ -14,8 +11,6 @@ import com.cworks.dao.service.UserService;
 @Controller
 public class LoginViewController
 {
-
-	private UserService userService;
 
 	/**
 	 * This will return Login view
@@ -43,14 +38,4 @@ public class LoginViewController
 		return "home";
 	}
 
-	/**
-	 * This is a Setter
-	 *
-	 * @param userService UserService
-	 */
-	@Autowired
-	public void setUserService(UserService userService)
-	{
-		this.userService = userService;
-	}
 }

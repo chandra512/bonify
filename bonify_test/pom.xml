@@ -66,6 +66,25 @@
                 <version>${org.springframework-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>4.2.2.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-spring</artifactId>
+                <version>5.12.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-kahadb-store -->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-kahadb-store</artifactId>
+                <version>5.8.0</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -79,6 +98,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
@@ -91,13 +111,13 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-api-mockito</artifactId>
                 <version>[1.6.2]</version>
                 <scope>test</scope>
             </dependency>
-
 
             <dependency>
                 <groupId>junit</groupId>
@@ -112,11 +132,13 @@
                 <artifactId>spring-security-core</artifactId>
                 <version>4.0.3.RELEASE</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
                 <version>4.0.3.RELEASE</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
@@ -130,12 +152,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>2.8.2</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -143,11 +159,6 @@
                 <version>1.2.7.RELEASE</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-email</artifactId>
-                <version>1.2</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -173,6 +184,26 @@
                 <version>${org.springframework-version}</version>
             </dependency>
 
+            <!--RabbitMQ-->
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-amqp</artifactId>
+                <version>1.5.2.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>1.5.2.RELEASE</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.8.2</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-mapper-asl</artifactId>
@@ -185,13 +216,11 @@
                 <version>2.5.3</version>
             </dependency>
 
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
             </dependency>
-
 
             <!-- THYMELEAF -->
             <dependency>
@@ -199,11 +228,13 @@
                 <artifactId>thymeleaf</artifactId>
                 <version>${thymeleaf.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.thymeleaf</groupId>
                 <artifactId>thymeleaf-spring4</artifactId>
                 <version>${thymeleaf.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>nz.net.ultraq.thymeleaf</groupId>
                 <artifactId>thymeleaf-layout-dialect</artifactId>
@@ -224,33 +255,6 @@
                 <version>1.7.13</version>
             </dependency>
 
-
-            <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <version>1.4.6-rc1</version>
-            </dependency>
-
-
-            <!-- Test -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.9</version>
-                <scope>test</scope>
-            </dependency>
-            <!--RabbitMQ-->
-
-            <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-amqp</artifactId>
-                <version>1.5.2.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-rabbit</artifactId>
-                <version>1.5.2.RELEASE</version>
-            </dependency>
             <dependency>
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
@@ -264,13 +268,13 @@
                 <version>5.1.37</version>
             </dependency>
 
-
             <!-- Hibernate -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>4.2.7.Final</version>
             </dependency>
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
@@ -283,6 +287,7 @@
                 <artifactId>c3p0</artifactId>
                 <version>0.9.1.2</version>
             </dependency>
+
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
@@ -295,34 +300,10 @@
                 <version>1.2.2</version>
             </dependency>
 
-
-            <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <version>2.4.7</version>
-            </dependency>
-
-
             <dependency>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
                 <version>3.5.1</version>
-            </dependency>
-
-            <!-- thymeleaf -->
-            <dependency>
-                <groupId>org.thymeleaf</groupId>
-                <artifactId>thymeleaf-spring3</artifactId>
-                <version>2.1.1.RELEASE</version>
-            </dependency>
-
-            <!--Redis-->
-
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-redis</artifactId>
-                <version>1.7.1.RELEASE</version>
             </dependency>
 
             <!-- http://mvnrepository.com/artifact/redis.clients/jedis -->
@@ -331,7 +312,6 @@
                 <artifactId>jedis</artifactId>
                 <version>2.7.3</version>
             </dependency>
-
 
             <!-- http://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
             <dependency>
@@ -348,15 +328,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jms</artifactId>
-                <version>4.2.2.RELEASE</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-spring</artifactId>
-                <version>5.12.1</version>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>1.2</version>
             </dependency>
 
         </dependencies>

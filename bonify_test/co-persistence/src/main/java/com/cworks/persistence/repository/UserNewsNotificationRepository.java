@@ -10,6 +10,7 @@ import com.cworks.persistence.entities.UserNewsNotificationEntity;
 import com.cworks.persistence.entities.UserNewsNotificationKey;
 
 /**
+ * This is Repository
  * Created by cthammana on 09.09.2016.
  */
 @Transactional

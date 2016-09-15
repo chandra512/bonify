@@ -3,6 +3,7 @@ package com.cworks.persistence.repository;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -24,6 +25,7 @@ public class SubscriptionRepositoryTest extends AbstractRepositoryTest
 
 	@Test
 	@Rollback
+	@Ignore
 	public void save() throws Exception
 	{
 		ChannelEntity channelEntity = super.saveChannel("TestChannel1");

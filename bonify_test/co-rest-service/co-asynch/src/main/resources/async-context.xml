@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:task="http://www.springframework.org/schema/task"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/task
+              http://www.springframework.org/schema/task/spring-task-3.2.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.bonify.rest"></context:component-scan>
+
+    <context:annotation-config></context:annotation-config>
+    <context:property-placeholder location="properties/asynch.properties"></context:property-placeholder>
+
+    <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+    </beans:bean>
+
+    <beans:bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <beans:constructor-arg name="brokerURL" value="${jms.broker.url}">
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <!-- A Pooling Based JMS Provider -->
+    <beans:bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <beans:property name="connectionFactory" ref="connectionFactory">
+        </beans:property>
+    </beans:bean>
+
+    <!-- Spring JMS Template -->
+    <beans:bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <beans:property name="connectionFactory" ref="jmsFactory"></beans:property>
+    </beans:bean>
+
+    <!--  Default Destination Queue Definition-->
+    <beans:bean id="bambergDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <beans:constructor-arg index="0" value="${jms.queue.bamberg}"/>
+    </beans:bean>
+
+    <!--  Default Destination Queue Definition-->
+    <beans:bean id="berlinDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <beans:constructor-arg index="0" value="${jms.queue.berlin}"/>
+    </beans:bean>
+
+    <beans:bean id="containerClient"
+                class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <beans:property name="concurrentConsumers"
+                        value="20"/><!-- if it is not 1 - it is difficult to see distribution to other services!!!change to 50,20 -->
+        <beans:property name="maxConcurrentConsumers"
+                        value="50"/><!-- if it is not 1 - it is difficult to see distribution to other services!!!change to 50-->
+        <beans:property name="idleTaskExecutionLimit" value="10"/>
+        <!-- <property name="maxMessagesPerTask" value="30"/> -->
+        <beans:property name="connectionFactory" ref="connectionFactory"/>
+        <beans:property name="sessionAcknowledgeMode" value="1"/>
+        <beans:property name="destination" ref="berlinDestination"></beans:property>
+    </beans:bean>
+
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+    <task:executor id="myExecutor" pool-size="5"/>
+    <task:scheduler id="myScheduler" pool-size="10"/>
+
+</beans:beans>

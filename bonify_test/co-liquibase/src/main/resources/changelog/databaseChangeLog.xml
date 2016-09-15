@@ -11,5 +11,7 @@
     <include file="src/main/resources/changelog/2016-09-09-UpdateUserNotifcation.xml"></include>
     <include file="src/main/resources/changelog/2016-09-09-UpdateUserNotifcation2.xml"></include>
     <include file="src/main/resources/changelog/2016-09-09-AlterTableUserNotifcation.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-14-AlterChannel.xml"></include>
+    <include file="src/main/resources/changelog/2016-09-14-Data_Insert.xml"></include>
 
 </databaseChangeLog>

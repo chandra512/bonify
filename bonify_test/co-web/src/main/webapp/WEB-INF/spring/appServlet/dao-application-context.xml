@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
+             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.springframework.org/schema/data/jpa  http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+             ">
+
+
+    <!--Loading propertiesfile -->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <context:component-scan base-package="com.cworks.persistence"></context:component-scan>
+
+    <jpa:repositories base-package="com.cworks.persistence.repository"></jpa:repositories>
+
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <beans:property name="dataSource" ref="extDataSource"></beans:property>
+    </beans:bean>
+
+    <!-- Ext Database credentials -->
+    <beans:bean id="extDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <beans:property name="driverClass" value="com.mysql.jdbc.Driver"></beans:property>
+        <beans:property name="jdbcUrl" value="jdbc:mysql://localhost:3306/bonify?autoConnect=true"></beans:property>
+        <beans:property name="user" value="root"></beans:property>
+        <beans:property name="password" value="root"></beans:property>
+        <beans:property name="minPoolSize" value="10"></beans:property>
+        <beans:property name="autoCommitOnClose" value="true"></beans:property>
+        <beans:property name="preferredTestQuery" value="SELECT 1 "></beans:property>
+    </beans:bean>
+
+    <beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <beans:property name="dataSource" ref="extDataSource"></beans:property>
+        <beans:property name="persistenceUnitName" value="bonify"></beans:property>
+        <beans:property name="jpaVendorAdapter" ref="jpaVendorAdapter"></beans:property>
+        <beans:property name="packagesToScan" value="com.cworks.persistence"/>
+        <beans:property name="jpaProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">${hibernate.dialect}</beans:prop>
+                <beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <beans:property name="database" value="MYSQL"></beans:property>
+        <beans:property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"></beans:property>
+    </beans:bean>
+
+    <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <beans:property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </beans:bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans:beans>
