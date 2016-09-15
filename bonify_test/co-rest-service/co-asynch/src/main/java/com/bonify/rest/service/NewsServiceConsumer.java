@@ -1,8 +1,6 @@
 package com.bonify.rest.service;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +73,7 @@ public class NewsServiceConsumer implements Callable<Long>
 		{
 			while (!this.listenerProperties.isStop())
 			{
-				// Send a message with a POJO - the template reuse the message converter
-				System.out.println("Waiting for Message.");
+				System.out.println(" Waiting for Message !");
 				String message = (String) this.jmsTemplate.receiveAndConvert(this.listenerProperties.getQueueName());
 				if (message != null)
 				{
@@ -86,7 +83,6 @@ public class NewsServiceConsumer implements Callable<Long>
 					this.saveNews(newsEntity);
 					count++;
 				}
-
 				Thread.sleep(1000);
 			}
 		}
@@ -99,8 +95,8 @@ public class NewsServiceConsumer implements Callable<Long>
 
 	private void saveNews(final NewsEntity newsEntity)
 	{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("news", newsEntity);
-		this.restTemplate.postForLocation("/channel/save", null, map);
+		/**
+		 * SAVE PART
+		 */
 	}
 }

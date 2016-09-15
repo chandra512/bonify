@@ -21,6 +21,8 @@
     <beans:bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <beans:constructor-arg name="brokerURL" value="${jms.broker.url}">
         </beans:constructor-arg>
+        <beans:constructor-arg name="userName" value="admin"></beans:constructor-arg>
+        <beans:constructor-arg name="password" value="admin"></beans:constructor-arg>
     </beans:bean>
 
     <!-- A Pooling Based JMS Provider -->
@@ -34,15 +36,15 @@
         <beans:property name="connectionFactory" ref="jmsFactory"></beans:property>
     </beans:bean>
 
-    <!--  Default Destination Queue Definition-->
+    <!-- &lt;!&ndash;  Default Destination Queue Definition&ndash;&gt;
     <beans:bean id="bambergDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <beans:constructor-arg index="0" value="${jms.queue.bamberg}"/>
-    </beans:bean>
+    </beans:bean>-->
 
-    <!--  Default Destination Queue Definition-->
+ <!--   &lt;!&ndash;  Default Destination Queue Definition&ndash;&gt;
     <beans:bean id="berlinDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <beans:constructor-arg index="0" value="${jms.queue.berlin}"/>
-    </beans:bean>
+    </beans:bean>-->
 
     <beans:bean id="containerClient"
                 class="org.springframework.jms.listener.DefaultMessageListenerContainer">
@@ -51,14 +53,9 @@
         <beans:property name="maxConcurrentConsumers"
                         value="50"/><!-- if it is not 1 - it is difficult to see distribution to other services!!!change to 50-->
         <beans:property name="idleTaskExecutionLimit" value="10"/>
-        <!-- <property name="maxMessagesPerTask" value="30"/> -->
         <beans:property name="connectionFactory" ref="connectionFactory"/>
         <beans:property name="sessionAcknowledgeMode" value="1"/>
-        <beans:property name="destination" ref="berlinDestination"></beans:property>
+        <beans:property name="destination" value="${jms.queue.berlin}"></beans:property>
     </beans:bean>
-
-    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-    <task:executor id="myExecutor" pool-size="5"/>
-    <task:scheduler id="myScheduler" pool-size="10"/>
 
 </beans:beans>
