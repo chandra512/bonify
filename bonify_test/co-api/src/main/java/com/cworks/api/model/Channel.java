@@ -4,7 +4,7 @@ package com.cworks.api.model;
  * This class is responsible for handling Channel information
  * Created by cthammana on 08.09.2016.
  */
-public interface Channel
+public interface Channel extends GenericResources
 {
 	/**
 	 * Gets id.

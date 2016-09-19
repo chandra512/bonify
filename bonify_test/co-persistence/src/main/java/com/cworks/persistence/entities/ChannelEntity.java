@@ -1,5 +1,8 @@
 package com.cworks.persistence.entities;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +38,13 @@ public class ChannelEntity implements Channel
 		this.name = name;
 	}
 
+	public ChannelEntity(Integer id, String name)
+	{
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public Integer getId()
 	{
 		return id;
@@ -53,5 +63,28 @@ public class ChannelEntity implements Channel
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return id;
+	}
+
+	@Override
+	public Map<Serializable, Serializable> getAdditionalInfo()
+	{
+		return null;
+	}
+
+	/**
+	 * Sets additional info.
+	 *
+	 * @param additionalInfo the additional info
+	 */
+	@Override
+	public void setAdditionalInfo(Map<Serializable, Serializable> additionalInfo)
+	{
+
 	}
 }

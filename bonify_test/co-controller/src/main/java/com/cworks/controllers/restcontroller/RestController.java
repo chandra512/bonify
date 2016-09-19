@@ -41,9 +41,9 @@ public class RestController
 	@Transactional
 	@RequestMapping(value = "/channel/save",
 					method = RequestMethod.POST)
-	public String saveNews(@RequestParam(name = "news") NewsEntity newsEntity)
+	public NewsEntity saveNews(@RequestParam(name = "news") NewsEntity newsEntity)
 	{
-		return this.gson.toJson(this.newsRepository.save(newsEntity));
+		return this.newsRepository.save(newsEntity);
 	}
 
 	@Autowired

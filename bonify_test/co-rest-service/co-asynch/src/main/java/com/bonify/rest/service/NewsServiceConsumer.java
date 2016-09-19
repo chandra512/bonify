@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import com.bonify.rest.model.AsynchConstants;
 import com.bonify.rest.model.ListenerProperties;
@@ -21,14 +20,9 @@ import com.cworks.persistence.entities.NewsEntity;
 @Scope(value = "prototype")
 public class NewsServiceConsumer implements Callable<Long>
 {
-
 	private ListenerProperties listenerProperties;
 
-	@Autowired
 	private JmsTemplate jmsTemplate;
-
-	@Autowired
-	private RestTemplate restTemplate;
 
 	/**
 	 * Empty constructor
@@ -49,6 +43,7 @@ public class NewsServiceConsumer implements Callable<Long>
 		return this.listenerProperties.getThreadName();
 	}
 
+	@Autowired
 	public void setJmsTemplate(JmsTemplate jmsTemplate)
 	{
 		this.jmsTemplate = jmsTemplate;
@@ -96,7 +91,7 @@ public class NewsServiceConsumer implements Callable<Long>
 	private void saveNews(final NewsEntity newsEntity)
 	{
 		/**
-		 * SAVE PART
+		 * @TODO Need to be implemented
 		 */
 	}
 }

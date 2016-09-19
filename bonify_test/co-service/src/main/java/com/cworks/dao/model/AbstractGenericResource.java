@@ -1,21 +1,22 @@
 package com.cworks.dao.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * This is Generic Resource
  * Created by cthammana on 08.09.2016.
  */
-public class GenericResource
+public abstract class AbstractGenericResource
 {
-	private Map<String, Object> additionalInfo;
+	private Map<Serializable, Serializable> additionalInfo;
 
 	/**
 	 * Gets additional info.
 	 *
 	 * @return the additional info
 	 */
-	public Map<String, Object> getAdditionalInfo()
+	public Map<Serializable, Serializable> getAdditionalInfo()
 	{
 		return additionalInfo;
 	}
@@ -25,7 +26,7 @@ public class GenericResource
 	 *
 	 * @param additionalInfo the additional info
 	 */
-	public void setAdditionalInfo(Map<String, Object> additionalInfo)
+	public void setAdditionalInfo(Map<Serializable, Serializable> additionalInfo)
 	{
 		this.additionalInfo = additionalInfo;
 	}

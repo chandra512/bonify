@@ -6,7 +6,7 @@ import com.cworks.api.model.User;
  * This is User Resource which is used in User interface
  * Created by cthammana on 08.09.2016.
  */
-public class UserResource extends GenericResource implements User
+public class UserResource extends AbstractGenericResource implements User
 {
 	private Long id;
 
